@@ -1,0 +1,40 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SoFetchGrooming.Models
+{
+    public class Product
+    {
+        /// <summary>
+        /// Product ID
+        /// </summary>
+        [Key]
+        public int ProductId { get; set; }
+
+        /// <summary>
+        /// Product Name
+        /// </summary>
+        [Required]
+        [StringLength(50)]
+        public required string ProductName { get; set; }
+
+        /// <summary>
+        /// Product Description
+        /// </summary>
+        [Required]
+        [StringLength(100)]
+        public required string ProductDescription { get; set; }
+
+        /// <summary>
+        /// Product Price
+        /// </summary>
+        [Required]
+        [DataType(DataType.Currency)]
+        public decimal ProductPrice { get; set; }
+
+        [Required]
+        public int ProductQuantity { get; set; }
+
+        [Url]
+        public required string ProductImage { get; set; }
+    }
+}
