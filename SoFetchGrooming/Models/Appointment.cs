@@ -26,7 +26,7 @@ namespace SoFetchGrooming.Models
 
         [Required]
         [Display(Name = "Appointment Time")]
-        public DateTime appointmentTime { get; set; }
+        public TimeSpan appointmentTime { get; set; }
     }
 
 }
