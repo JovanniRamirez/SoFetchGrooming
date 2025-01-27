@@ -12,7 +12,7 @@ namespace SoFetchGrooming.Models
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
 
         [Required]
         public DateTime OrderDate { get; set; }
@@ -20,9 +20,6 @@ namespace SoFetchGrooming.Models
         [Required]
         
         public required string OrderStatus { get; set; }
-
-        // Navigation property
-        //public virtual required User User { get; set; }
 
         public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
