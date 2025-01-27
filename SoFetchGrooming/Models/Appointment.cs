@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.Contracts;
 
 namespace SoFetchGrooming.Models
@@ -12,7 +13,11 @@ namespace SoFetchGrooming.Models
         public int appointmentId { get; set; }
 
         [Required]
-        public int userId { get; set; }
+        public int UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual required User User { get; set; }
+
 
         [Required]
         public int petId { get; set; }

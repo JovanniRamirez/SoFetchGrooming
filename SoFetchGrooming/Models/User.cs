@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SoFetchGrooming.Models
 {
@@ -23,5 +24,7 @@ namespace SoFetchGrooming.Models
         [StringLength(50)]
         public required string UserPhone { get; set; }
 
+        // Navigation Property
+        public virtual required ICollection<ShoppingCart> ShoppingCarts { get; set; }
     }
 }

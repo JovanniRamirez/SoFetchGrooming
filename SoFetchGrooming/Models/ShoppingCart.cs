@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SoFetchGrooming.Models
 {
@@ -8,7 +9,10 @@ namespace SoFetchGrooming.Models
         public int CartId { get; set; }
 
         [Required]
-        public int userId { get; set; }
+        public int UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
 
         [Required]
         public required List<CartItem> Items { get; set; } = new List<CartItem>();

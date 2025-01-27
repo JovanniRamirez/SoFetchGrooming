@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SoFetchGrooming.Models
 {
@@ -9,6 +10,9 @@ namespace SoFetchGrooming.Models
 
         [Required]
         public int UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual required User User { get; set; }
 
         [Required]
         public DateTime OrderDate { get; set; }
