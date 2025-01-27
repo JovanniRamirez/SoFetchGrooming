@@ -35,5 +35,27 @@ namespace SoFetchGrooming.Models
                 return total;
             }
         }
+
+        // Create order from Shopping Cart
+        public static Order CreateOrder(ShoppingCart cart)
+        {
+            Order order = new Order
+            {
+                UserId = cart.UserId,
+                OrderDate = DateTime.Now,
+                OrderStatus = "Pending"
+            };
+            foreach (CartItem item in cart.Items)
+            {
+                OrderItem orderItem = new OrderItem
+                {
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Price = item.Product.ProductPrice
+                };
+                order.OrderItems.Add(orderItem);
+            }
+            return order;
+        }
     }
 }
