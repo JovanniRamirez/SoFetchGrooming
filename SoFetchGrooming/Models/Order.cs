@@ -12,7 +12,7 @@ namespace SoFetchGrooming.Models
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public virtual required User User { get; set; }
+        public virtual User User { get; set; }
 
         [Required]
         public DateTime OrderDate { get; set; }
