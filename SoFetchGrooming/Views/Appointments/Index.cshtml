@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SoFetchGrooming.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.petId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.serviceTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.appointmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.appointmentTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.petId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.serviceTypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.appointmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.appointmentTime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.appointmentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.appointmentId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.appointmentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
