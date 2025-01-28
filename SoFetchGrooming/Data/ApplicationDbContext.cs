@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SoFetchGrooming.Models;
 
 namespace SoFetchGrooming.Data
 {
@@ -9,5 +10,6 @@ namespace SoFetchGrooming.Data
             : base(options)
         {
         }
+        public DbSet<Appointment> Appointment { get; set; } = default!;
     }
 }
