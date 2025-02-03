@@ -36,7 +36,7 @@ namespace SoFetchGrooming.Controllers
 
             var appointment = await _context.Appointment
                 .Include(a => a.User)
-                .FirstOrDefaultAsync(m => m.appointmentId == id);
+                .FirstOrDefaultAsync(m => m.AppointmentId == id);
             if (appointment == null)
             {
                 return NotFound();
@@ -93,7 +93,7 @@ namespace SoFetchGrooming.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("appointmentId,UserId,petId,serviceTypeId,appointmentDate,appointmentTime")] Appointment appointment)
         {
-            if (id != appointment.appointmentId)
+            if (id != appointment.AppointmentId)
             {
                 return NotFound();
             }
@@ -107,7 +107,7 @@ namespace SoFetchGrooming.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AppointmentExists(appointment.appointmentId))
+                    if (!AppointmentExists(appointment.AppointmentId))
                     {
                         return NotFound();
                     }
@@ -132,7 +132,7 @@ namespace SoFetchGrooming.Controllers
 
             var appointment = await _context.Appointment
                 .Include(a => a.User)
-                .FirstOrDefaultAsync(m => m.appointmentId == id);
+                .FirstOrDefaultAsync(m => m.AppointmentId == id);
             if (appointment == null)
             {
                 return NotFound();
@@ -158,7 +158,7 @@ namespace SoFetchGrooming.Controllers
 
         private bool AppointmentExists(int id)
         {
-            return _context.Appointment.Any(e => e.appointmentId == id);
+            return _context.Appointment.Any(e => e.AppointmentId == id);
         }
     }
 }
