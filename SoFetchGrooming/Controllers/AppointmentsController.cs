@@ -48,7 +48,7 @@ namespace SoFetchGrooming.Controllers
         // GET: Appointments/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "UserId", "UserEmail");
+            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Email");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace SoFetchGrooming.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("appointmentId,UserId,petId,serviceTypeId,appointmentDate,appointmentTime")] Appointment appointment)
+        public async Task<IActionResult> Create([Bind("AppointmentId,UserId,PetId,ServiceTypeId,AppointmentDate,AppointmentTime")] Appointment appointment)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace SoFetchGrooming.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("appointmentId,UserId,petId,serviceTypeId,appointmentDate,appointmentTime")] Appointment appointment)
+        public async Task<IActionResult> Edit(int id, [Bind("AppointmentId, UserId, PetId, ServiceTypeId, AppointmentDate, AppointmentTime")] Appointment appointment)
         {
             if (id != appointment.AppointmentId)
             {
