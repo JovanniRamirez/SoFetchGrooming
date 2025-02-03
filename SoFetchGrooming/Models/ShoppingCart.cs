@@ -12,7 +12,7 @@ namespace SoFetchGrooming.Models
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [Required]
         public required List<CartItem> Items { get; set; } = new List<CartItem>();
