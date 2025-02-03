@@ -30,7 +30,7 @@ namespace SoFetchGrooming.Data
 
         public DbSet<ShoppingCart> ShoppingCarts { get; set; } = default!;
 
-        public DbSet<User> Users { get; set; } = default!;
+        public DbSet<ApplicationUser> Users { get; set; } = default!;
 
 
     }

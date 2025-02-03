@@ -13,10 +13,10 @@ namespace SoFetchGrooming.Models
         public int AppointmentId { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public required string UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public virtual required User User { get; set; }
+        public virtual required ApplicationUser User { get; set; }
 
 
         [Required]

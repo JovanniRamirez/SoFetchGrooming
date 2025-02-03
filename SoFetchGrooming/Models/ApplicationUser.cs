@@ -8,7 +8,7 @@ namespace SoFetchGrooming.Models
     /// Represents a user in the identity system
     /// Extends the IdentityUser class from the Microsoft.AspNetCore.Identity namespace
     /// </summary>
-    public class User : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         /// <summary>
         /// Property for the first name of the user.

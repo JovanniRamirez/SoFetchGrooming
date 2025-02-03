@@ -48,7 +48,7 @@ namespace SoFetchGrooming.Controllers
         // GET: Appointments/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "UserId", "UserEmail");
+            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "UserId", "UserEmail");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace SoFetchGrooming.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "UserId", "UserEmail", appointment.UserId);
+            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "UserId", "UserEmail", appointment.UserId);
             return View(appointment);
         }
 
@@ -82,7 +82,7 @@ namespace SoFetchGrooming.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "UserId", "UserEmail", appointment.UserId);
+            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "UserId", "UserEmail", appointment.UserId);
             return View(appointment);
         }
 
@@ -118,7 +118,7 @@ namespace SoFetchGrooming.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "UserId", "UserEmail", appointment.UserId);
+            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "UserId", "UserEmail", appointment.UserId);
             return View(appointment);
         }
 
