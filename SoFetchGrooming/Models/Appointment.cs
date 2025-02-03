@@ -10,7 +10,7 @@ namespace SoFetchGrooming.Models
     public class Appointment
     {
         [Key]
-        public int appointmentId { get; set; }
+        public int AppointmentId { get; set; }
 
         [Required]
         public int UserId { get; set; }
@@ -20,18 +20,18 @@ namespace SoFetchGrooming.Models
 
 
         [Required]
-        public int petId { get; set; }
+        public int PetId { get; set; }
 
         [Required]
-        public int serviceTypeId { get; set; }
+        public int ServiceTypeId { get; set; }
 
         [Required]
         [Display(Name = "Appointment Date")]
-        public DateTime appointmentDate { get; set; }
+        public DateTime AppointmentDate { get; set; }
 
         [Required]
         [Display(Name = "Appointment Time")]
-        public TimeSpan appointmentTime { get; set; }
+        public TimeSpan AppointmentTime { get; set; }
     }
 
 }
