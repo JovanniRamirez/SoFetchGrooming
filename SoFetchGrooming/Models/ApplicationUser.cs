@@ -24,7 +24,7 @@ namespace SoFetchGrooming.Models
         [StringLength(50)]
         public required string LastName { get; set; }
 
-        // Navigation Property
+        // Navigation Property for the ShoppingCarts that belong to the user
         public virtual required ICollection<ShoppingCart> ShoppingCarts { get; set; }
     }
 }
