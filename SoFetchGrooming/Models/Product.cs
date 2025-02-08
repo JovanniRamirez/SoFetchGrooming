@@ -31,9 +31,15 @@ namespace SoFetchGrooming.Models
         [DataType(DataType.Currency)]
         public decimal ProductPrice { get; set; }
 
+        /// <summary>
+        /// Product Quantity in stock
+        /// </summary>
         [Required]
         public int ProductQuantity { get; set; }
 
+        /// <summary>
+        /// Product Image
+        /// </summary>
         [Url]
         public required string ProductImage { get; set; }
     }

@@ -11,7 +11,9 @@ namespace SoFetchGrooming.Data
         {
         }
         public DbSet<Admin> Admins { get; set; } = default!;
-        
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; } = default!;
+
         public DbSet<Appointment> Appointment { get; set; } = default!;
 
         public DbSet<CartItem> CartItems { get; set; } = default!;
@@ -24,13 +26,13 @@ namespace SoFetchGrooming.Data
 
         public DbSet<PetList> PetLists { get; set; } = default!;
 
+        public DbSet<PetType> PetTypes { get; set; } = default!;
+
         public DbSet<Product> Products { get; set; } = default!;
 
         public DbSet<ServiceType> ServiceTypes { get; set; } = default!;
 
         public DbSet<ShoppingCart> ShoppingCarts { get; set; } = default!;
-
-        public DbSet<ApplicationUser> Users { get; set; } = default!;
 
 
     }
