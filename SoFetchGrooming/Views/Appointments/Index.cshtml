@@ -4,56 +4,92 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ServiceTypeId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AppointmentDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AppointmentTime)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServiceTypeId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppointmentDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppointmentTime)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AppointmentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AppointmentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AppointmentId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<!-- Service and Pricing -->
+<div class="container">
+
+    <div class="row">
+
+        <!-- Grooming Services -->
+        <div class="col-xxl-3 col-xl-4 col-12">
+
+            <h3> Grooming Services </h3>
+
+            <ul>
+                <li>Full Body Wash</li>
+                <li>De-Shedding</li>
+                <li>Dog Grooming</li>
+                <li>Dog Nail Trimming</li>
+                <li>Cat Nail Trimming</li>
+                <li>Ear Cleaning</li>
+                <li>Tooth Brushing</li>
+                <li>Gland Expression</li>
+                <li>Brushing</li>
+                <li>Flea Control</li>
+                <li>Breed Specific Haircuts</li>
+            </ul>
+        </div>
+
+        <!-- Pricing estimates -->
+        <div class="col-xxl-9 col-xl-8 col-12">
+
+            <h3> Price estimate </h3>
+
+            <div class="row justify-content-center">
+
+
+                <div class="card col-lg-3 col-md-6 col-sm-6">
+                    <img src="https://placehold.co/100" class="card-img-top" alt="placeholder" />
+                    <div class="card-body">
+                        <h5 class="card-title"> Small Dogs </h5>
+                        <p class="card-text">
+                            - Under 25 lbs
+                            <br />
+                            - $65
+                        </p>
+                    </div>
+                </div>
+    
+                <div class="card col-lg-3 col-md-6 col-sm-6">
+                    <img src="https://placehold.co/100" class="card-img-top" alt="placeholder" />
+                    <div class="card-body">
+                        <h5 class="card-title"> Medium Dogs </h5>
+                        <p class="card-text">
+                            - 25-50 lbs
+                            <br />
+                            - $85
+                        </p>
+                    </div>
+                </div>    
+
+                <div class="card col-lg-3 col-md-6 col-sm-6">
+                    <img src="https://placehold.co/100" class="card-img-top" alt="placeholder" />
+                    <div class="card-body">
+                        <h5 class="card-title"> Large Dogs </h5>
+                        <p class="card-text">
+                            - 50-75 lbs
+                            <br />
+                            - $105
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card col-lg-3 col-md-6 col-sm-6">
+                    <img src="https://placehold.co/100" class="card-img-top" alt="placeholder" />
+                    <div class="card-body">
+                        <h5 class="card-title"> Giant Dogs </h5>
+                        <p class="card-text">
+                            - Over 75 lbs
+                            <br />
+                            - $125
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
