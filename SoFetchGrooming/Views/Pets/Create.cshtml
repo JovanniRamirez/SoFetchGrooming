@@ -1,0 +1,83 @@
+﻿@model SoFetchGrooming.Models.Pet
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Pet</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetName" class="control-label"></label>
+                <input asp-for="PetName" class="form-control" />
+                <span asp-validation-for="PetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetTypeId" class="control-label"></label>
+                <select asp-for="PetTypeId" class ="form-control" asp-items="ViewBag.PetTypeId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetBreed" class="control-label"></label>
+                <input asp-for="PetBreed" class="form-control" />
+                <span asp-validation-for="PetBreed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetColor" class="control-label"></label>
+                <input asp-for="PetColor" class="form-control" />
+                <span asp-validation-for="PetColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetWeight" class="control-label"></label>
+                <input asp-for="PetWeight" class="form-control" />
+                <span asp-validation-for="PetWeight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetAge" class="control-label"></label>
+                <input asp-for="PetAge" class="form-control" />
+                <span asp-validation-for="PetAge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetGender" class="control-label"></label>
+                <input asp-for="PetGender" class="form-control" />
+                <span asp-validation-for="PetGender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetVaccination" class="control-label"></label>
+                <input asp-for="PetVaccination" class="form-control" />
+                <span asp-validation-for="PetVaccination" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetAllergies" class="control-label"></label>
+                <input asp-for="PetAllergies" class="form-control" />
+                <span asp-validation-for="PetAllergies" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetSpecialNeeds" class="control-label"></label>
+                <input asp-for="PetSpecialNeeds" class="form-control" />
+                <span asp-validation-for="PetSpecialNeeds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PetMedications" class="control-label"></label>
+                <input asp-for="PetMedications" class="form-control" />
+                <span asp-validation-for="PetMedications" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
