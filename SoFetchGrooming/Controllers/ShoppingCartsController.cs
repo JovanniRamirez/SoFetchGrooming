@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SoFetchGrooming.Data;
+using SoFetchGrooming.Models;
 
-namespace SoFetchGrooming.Models
+namespace SoFetchGrooming.Controllers
 {
     public class ShoppingCartsController : Controller
     {
