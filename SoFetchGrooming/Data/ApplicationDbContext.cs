@@ -24,8 +24,6 @@ namespace SoFetchGrooming.Data
 
         public DbSet<Pet> Pets { get; set; } = default!;
 
-        public DbSet<PetList> PetLists { get; set; } = default!;
-
         public DbSet<PetType> PetTypes { get; set; } = default!;
 
         public DbSet<Product> Products { get; set; } = default!;
