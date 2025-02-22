@@ -26,5 +26,8 @@ namespace SoFetchGrooming.Models
 
         // Navigation Property for the ShoppingCarts that belong to the user
         public virtual required ICollection<ShoppingCart> ShoppingCarts { get; set; }
+
+        // Links pets directly to the user
+        public virtual ICollection<Pet> Pets { get; set; } = new List<Pet>();
     }
 }
