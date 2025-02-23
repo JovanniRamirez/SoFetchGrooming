@@ -1,101 +1,60 @@
-﻿@model IEnumerable<SoFetchGrooming.Models.Pet>
+﻿@model IEnumerable<Pet>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Your Pets";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetBreed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetColor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetWeight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetAge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetGender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetVaccination)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetAllergies)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetSpecialNeeds)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetMedications)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetType.PetTypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetBreed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetColor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetWeight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetAge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetGender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetVaccination)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetAllergies)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetSpecialNeeds)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetMedications)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PetId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PetId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PetId">Delete</a>
-            </td>
-        </tr>
+@if (!Model.Any())
+{
+    <h1>Seems like you have no pets registered with us</h1>
+    <hr />
+    <p>
+        <a asp-action="Create">Want to add a pet?</a>
+    </p>
 }
-    </tbody>
-</table>
+
+else
+{    
+    <h1>Your pets</h1>
+
+    <p>
+        <a asp-action="Create">Add a pet</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.PetName)</th>
+                <th>@Html.DisplayNameFor(model => model.PetType)</th>
+                <th>@Html.DisplayNameFor(model => model.PetBreed)</th>
+                <th>@Html.DisplayNameFor(model => model.PetColor)</th>
+                <th>@Html.DisplayNameFor(model => model.PetWeight)</th>
+                <th>@Html.DisplayNameFor(model => model.PetAge)</th>
+                <th>@Html.DisplayNameFor(model => model.PetGender)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td> @Html.DisplayFor(modelItem => item.PetName) </td>
+                    <td> @Html.DisplayFor(modelItem => item.PetType.PetTypeName) </td>
+                    <td> @Html.DisplayFor(modelItem => item.PetBreed) </td>
+                    <td> @Html.DisplayFor(modelItem => item.PetColor) </td>
+                    <td> @Html.DisplayFor(modelItem => item.PetWeight) lbs </td>
+                    <td> @Html.DisplayFor(modelItem => item.PetAge) years </td>
+                    <td> @Html.DisplayFor(modelItem => item.PetGender) </td>
+                    @* <td> @Html.DisplayFor(modelItem => item.PetVaccination) </td> *@
+                    @* <td> @Html.DisplayFor(modelItem => item.PetAllergies) </td> *@
+                    @* <td> @Html.DisplayFor(modelItem => item.PetSpecialNeeds) </td> *@
+                    @* <td> @Html.DisplayFor(modelItem => item.PetMedications) </td> *@
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.PetId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.PetId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.PetId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
