@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SoFetchGrooming.Data;
 using SoFetchGrooming.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SoFetchGrooming.Controllers
 {
@@ -22,8 +23,9 @@ namespace SoFetchGrooming.Controllers
         // GET: Appointments
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Appointment.Include(a => a.User);
-            return View(await applicationDbContext.ToListAsync());
+            // var applicationDbContext = _context.Appointment.Include(a => a.User);
+            // return View(await applicationDbContext.ToListAsync());
+            return View();
         }
 
         // GET: Appointments/Details/5
@@ -46,6 +48,7 @@ namespace SoFetchGrooming.Controllers
         }
 
         // GET: Appointments/Create
+        [Authorize] // Only allow authenticated users to create appointments
         public IActionResult Create()
         {
             ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Email");
@@ -57,6 +60,7 @@ namespace SoFetchGrooming.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize] 
         public async Task<IActionResult> Create([Bind("AppointmentId,UserId,PetId,ServiceTypeId,AppointmentDate,AppointmentTime")] Appointment appointment)
         {
             if (ModelState.IsValid)
