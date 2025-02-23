@@ -32,6 +32,15 @@ namespace SoFetchGrooming.Data
 
         public DbSet<ShoppingCart> ShoppingCarts { get; set; } = default!;
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+            // Seed PetTypes
+            modelBuilder.Entity<PetType>().HasData(
+                new PetType { PetTypeId = 1, PetTypeName = "Dog" },
+                new PetType { PetTypeId = 2, PetTypeName = "Cat" }
+            );
+        }
     }
 }
