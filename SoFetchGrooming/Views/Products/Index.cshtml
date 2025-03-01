@@ -1,4 +1,7 @@
-﻿@model IEnumerable<SoFetchGrooming.Models.Product>
+﻿@using X.PagedList.Mvc
+@using X.PagedList
+
+@model IPagedList<SoFetchGrooming.Models.Product>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,53 +10,68 @@
 <h1>Products</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductQuantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductImage)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductImage)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-            </td>
-        </tr>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="@item.ProductImage" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.ProductName)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.ProductDescription)</p>
+                    <p class="card-text"><strong>Price:</strong> @Html.DisplayFor(modelItem => item.ProductPrice)</p>
+                    <p class="card-text"><strong>Quantity:</strong> @Html.DisplayFor(modelItem => item.ProductQuantity)</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-info">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@{
+    int startPage = Math.Max(1, Model.PageNumber - 2); // Ensure startPage is at least 1
+    int endPage = Math.Min(Model.PageCount, startPage + 4); // Display up to 5 pages
+    if (endPage - startPage < 4) // Adjust startPage for when endPage is at the end
+    {
+        startPage = Math.Max(1, endPage - 4);
+    }
 }
-    </tbody>
-</table>
+
+<nav aria-label="Page navigation for Products"> 
+    <ul class="pagination justify-content-center">
+        @*If HasPrevious is true return "" else return disable ternary conditional operator to disable Previous Link in pagination*@
+        <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+            <a class="page-link" href="@Url.Action("Index", new{page = 1 })">First</a>
+        </li>
+        <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+            @*Link generates URL pointing to ProductIndex and returns one less the current page*@
+            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })">Previous</a>
+        </li>
+        @for (int i = startPage; i <= endPage; i++) @*For all the pages in ProductDatabase with range of 6 page nav links*@
+        {
+            @*If the PageNumber equals the i in loop, activate the current page link (highlight)*@
+            <li class="page-item @(Model.PageNumber == i ? "active" : "")">
+                @*Link generates URL pointing to Product Index view and returns the current link number page view*@
+                <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+            </li>
+        }
+        @*If HasNextPage is true return "" else return false and disable the Next link*@
+        <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+            @*Link generates URL pointing to Products Index view and returns the next page*@
+            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">Next</a>
+        </li>
+        <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+            @*Link generates URL pointing to Products Index view and returns the last page*@
+            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageCount })">Last</a>
+        </li>
+    </ul>
+</nav>

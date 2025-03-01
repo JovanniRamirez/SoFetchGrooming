@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SoFetchGrooming.Data;
 using SoFetchGrooming.Models;
+using X.PagedList;
 
 namespace SoFetchGrooming.Controllers
 {
@@ -38,10 +39,13 @@ namespace SoFetchGrooming.Controllers
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous] // Allow anonymous users to access this action
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            // Return the list of products to the view
-            return View(await _context.Products.ToListAsync());
+            var products = await _context.Products.OrderBy(p => p.ProductId).ToListAsync(); // Order the products by the product id
+            int pageSize = 12; // Set the page size to 12
+            int pageNumber = (page ?? 1); // Set the page number to the page number or 1
+            // Return the products to the view using ToPagedList to paginate the products
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Products/Details
