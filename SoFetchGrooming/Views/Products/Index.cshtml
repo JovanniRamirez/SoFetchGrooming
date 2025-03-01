@@ -37,41 +37,6 @@
     }
 </div>
 
-@{
-    int startPage = Math.Max(1, Model.PageNumber - 2); // Ensure startPage is at least 1
-    int endPage = Math.Min(Model.PageCount, startPage + 4); // Display up to 5 pages
-    if (endPage - startPage < 4) // Adjust startPage for when endPage is at the end
-    {
-        startPage = Math.Max(1, endPage - 4);
-    }
-}
+@Html.Partial("_Pagination", Model)
 
-<nav aria-label="Page navigation for Products"> 
-    <ul class="pagination justify-content-center">
-        @*If HasPrevious is true return "" else return disable ternary conditional operator to disable Previous Link in pagination*@
-        <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
-            <a class="page-link" href="@Url.Action("Index", new{page = 1 })">First</a>
-        </li>
-        <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
-            @*Link generates URL pointing to ProductIndex and returns one less the current page*@
-            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })">Previous</a>
-        </li>
-        @for (int i = startPage; i <= endPage; i++) @*For all the pages in ProductDatabase with range of 6 page nav links*@
-        {
-            @*If the PageNumber equals the i in loop, activate the current page link (highlight)*@
-            <li class="page-item @(Model.PageNumber == i ? "active" : "")">
-                @*Link generates URL pointing to Product Index view and returns the current link number page view*@
-                <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
-            </li>
-        }
-        @*If HasNextPage is true return "" else return false and disable the Next link*@
-        <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
-            @*Link generates URL pointing to Products Index view and returns the next page*@
-            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">Next</a>
-        </li>
-        <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
-            @*Link generates URL pointing to Products Index view and returns the last page*@
-            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageCount })">Last</a>
-        </li>
-    </ul>
-</nav>
+
