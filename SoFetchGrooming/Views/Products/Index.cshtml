@@ -38,11 +38,11 @@
 </div>
 
 @{
-    int startPage = Math.Max(1, Model.PageNumber - 1); // Ensure startPage is at least 1
-    int endPage = Math.Min(Model.PageCount, startPage + 5); // Display up to 6 pages
-    if (endPage - startPage < 2) // Adjust startPage if less than 3 pages are displayed
+    int startPage = Math.Max(1, Model.PageNumber - 2); // Ensure startPage is at least 1
+    int endPage = Math.Min(Model.PageCount, startPage + 4); // Display up to 5 pages
+    if (endPage - startPage < 4) // Adjust startPage for when endPage is at the end
     {
-        startPage = Math.Max(1, endPage - 2);
+        startPage = Math.Max(1, endPage - 4);
     }
 }
 
