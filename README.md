@@ -33,9 +33,9 @@ I added a shared view for Pagination Navigation that is sharable for any view th
  - _Pagination accepts the list of model and connects the links of the pagination navigation to the first page, the last page, the previous page and the next page
  - I also managed it so the highlighted link stays in the middle of the 5 integer page links displayed if the highlighted link is any integer page not first or second or last or second to last
 ![Product Page Navigation Page 1](SoFetchGrooming/DocsAndImages/ProductPageNav1.png)
-![Product Page Navigation Page 4](SoFetchedGrooming/DocsAndImages/ProductPageNav4.png)
-![Product Page Navigation Page 76](SoFetchedGrooming/ProductPageNav76.png)
-![Product Page Navigation Page 77](SoFetchedGrooming/ProductPageNav77.png)
+![Product Page Navigation Page 4](SoFetchGrooming/DocsAndImages/ProductPageNav4.png)
+![Product Page Navigation Page 76](SoFetchGrooming/DocsAndImages/ProductPageNav76.png)
+![Product Page Navigation Page 77](SoFetchGrooming/DocsAndImages/ProductPageNav77.png)
 
 ## Helpful Links
 [Bootstrap Documentation](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
