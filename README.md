@@ -32,7 +32,7 @@ I added a shared view for Pagination Navigation that is sharable for any view th
  - In my case I added it to the bottom of Product.Index.chtml as: @Html.Partial("_Pagination", Model)
  - _Pagination accepts the list of model and connects the links of the pagination navigation to the first page, the last page, the previous page and the next page
  - I also managed it so the highlighted link stays in the middle of the 5 integer page links displayed if the highlighted link is any integer page not first or second or last or second to last
-![image](SoFetchGrooming\DocsAndImages\ProductPageNav1.png)
+![image](SoFetchGrooming\SoFetchGrooming\DocsAndImages\ProductPageNav1.png)
 ![image](DocsAndImages\ProductPageNav4.png)
 ![image](DocsAndImages\ProductPageNav76.png)
 ![image](DocsAndImages\ProductPageNav77.png)
