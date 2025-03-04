@@ -35,3 +35,59 @@ body {
     flex-direction: column;
     justify-content: space-between;
 }
+/*Adjust the Top tool bar to align left and right while screen is large*/
+@media (min-width: 992px) {
+    .text-lg-left {
+        text-align: left !important;
+    }
+    .text-lg-right {
+        text-align: right !important;
+    }
+    .text-lg-center {
+        text-align: center !important;
+    }
+}
+
+/*Add padding right of Toolbar text FAQ and Help*/
+.pr-3,
+.px-3 {
+    padding-right: 1rem !important;
+}
+
+/*Add padding left of Toolbar text Support*/
+.pl-3,
+.px-3 {
+    padding-left: 1rem !important;
+}
+
+/*Remove the underline of the <a> links*/
+a {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+/*Adjusted h1 font*/
+h1 {
+    font-weight: 500 !important;
+}
+
+/*Make the Title h1 stay in one line*/
+.navbar-brand h1 {
+    white-space: nowrap;
+}
+
+/*Make some space between the Nav and the main body*/
+.container {
+    padding-top: 3rem;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #000000 !important;
+    background: #258cfb;
+}
+
+/*Make the footer static to keep footer from overlapping into the main body*/
+footer {
+    position: static !important;
+}
