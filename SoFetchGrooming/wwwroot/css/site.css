@@ -86,3 +86,8 @@ h1 {
     color: #000000 !important;
     background: #258cfb;
 }
+
+/*Make the footer static to keep footer from overlapping into the main body*/
+footer {
+    position: static !important;
+}
