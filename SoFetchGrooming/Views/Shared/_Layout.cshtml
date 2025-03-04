@@ -7,13 +7,76 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SoFetchGrooming.styles.css" asp-append-version="true" />
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
 </head>
-<body>      
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-2 px-lg-5">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-white pr-3" href="">FAQs</a>
+                    <span class="text-white">|</span>
+                    <a class="text-white px-3" href="">Help</a>
+                    <span class="text-white">|</span>
+                    <a class="text-white pl-3" href="">Support</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-white px-3" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-white px-3" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-white px-3" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-white px-3" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-white pl-3" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row py-3 px-lg-5">
+            <div class="col-lg-4">
+                <a href="" class="navbar-brand d-none d-lg-block">
+                    <h1 class="m-0 display-5 text-capitalize text-secondary"><span class="text-primary">SoFetch</span>Grooming</h1>
+                </a>
+            </div>
+            <div class="col-lg-8 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <div class="d-inline-flex flex-column text-center pr-3 border-right">
+                        <h6>Opening Hours</h6>
+                        <p class="m-0">8.00AM - 9.00PM</p>
+                    </div>
+                    <div class="d-inline-flex flex-column text-center px-3 border-right">
+                        <h6>Email Us</h6>
+                        <p class="m-0">info@example.com</p>
+                    </div>
+                    <div class="d-inline-flex flex-column text-center pl-3">
+                        <h6>Call Us</h6>
+                        <p class="m-0">+012 345 6789</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <header>
-        <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5"> 
             <div class="container-fluid">
 
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SoFetch Grooming</a>
+                <a class="navbar-brand d-block d-lg-none" asp-area="" asp-controller="Home" asp-action="Index">
+                    <h1 class="m-0 display-5 text-capitalize text-white"><span class="text-primary">SoFetch</span>Grooming</h1>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,29 +85,29 @@
                 <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Gallery">Gallery</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Gallery">Gallery</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">Make an appointment</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Appointments" asp-action="Index">Appointment</a>
                         </li >
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                         </li>
 
                     </ul>
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCarts" asp-action="Index">Cart</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="ShoppingCarts" asp-action="Index">Cart</a>
                         </li>
                     </ul>
                     
@@ -69,3 +132,22 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all navbar links
+        var navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        // Get the current URL
+        var currentUrl = window.location.href;
+
+        // Loop through each link
+        navLinks.forEach(function(link) {
+            // Check if the link's href matches the current URL
+            if (link.href === currentUrl) {
+                // Add the 'active' class
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
