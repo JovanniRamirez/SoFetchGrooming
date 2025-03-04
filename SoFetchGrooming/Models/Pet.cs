@@ -19,7 +19,7 @@ namespace SoFetchGrooming.Models
         /// </summary>
         [Required]
         public required string UserId { get; set; }
-
+        
         /// <summary>
         /// User is the user who owns the pet ForeignKey
         /// </summary>
@@ -37,13 +37,13 @@ namespace SoFetchGrooming.Models
         /// PetTypeId is the Id of the type of pet (dog, cat, etc.)
         /// </summary>
         [Required]
-        [ForeignKey("PetTypeId")]
+        [ForeignKey("PetType")]
         public int PetTypeId { get; set; }
         
         /// <summary>
         /// PetType is the type of pet ForeignKey
         /// </summary>
-        public virtual required PetType PetType { get; set; }
+        public virtual PetType? PetType { get; set; }
 
         /// <summary>
         /// PetBreed is the breed of the pet
@@ -107,6 +107,47 @@ namespace SoFetchGrooming.Models
         [Required]
         [StringLength(50)]
         public required string PetMedications { get; set; }
+    }
+
+    /// <summary>
+    /// From Adrian:
+    /// I added this ViewModel to handle the Pet creation form
+    /// to handle the UserId in the controller
+    /// </summary>
+    public class PetViewModel
+    {
+        [Required]
+        public string PetName { get; set; }
+
+        [Required]
+        public int PetTypeId { get; set; }
+
+        [Required]
+        public string PetBreed { get; set; }
+
+        [Required]
+        public string PetColor { get; set; }
+
+        [Required]
+        public string PetWeight { get; set; }
+
+        [Required]
+        public string PetAge { get; set; }
+
+        [Required]
+        public string PetGender { get; set; }
+
+        [Required]
+        public string PetVaccination { get; set; }
+
+        [Required]
+        public string PetAllergies { get; set; }
+
+        [Required]
+        public string PetSpecialNeeds { get; set; }
+
+        [Required]
+        public string PetMedications { get; set; }
     }
 }
 
