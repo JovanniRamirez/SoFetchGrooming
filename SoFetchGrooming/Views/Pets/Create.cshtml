@@ -12,67 +12,91 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
-            </div>
+
             <div class="form-group">
                 <label asp-for="PetName" class="control-label"></label>
                 <input asp-for="PetName" class="form-control" />
                 <span asp-validation-for="PetName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="PetTypeId" class="control-label"></label>
-                <select asp-for="PetTypeId" class ="form-control" asp-items="ViewBag.PetTypeId"></select>
+                <select asp-for="PetTypeId" class="form-control" asp-items="ViewBag.PetTypeId"></select>
+                <span asp-validation-for="PetTypeId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="PetBreed" class="control-label"></label>
                 <input asp-for="PetBreed" class="form-control" />
                 <span asp-validation-for="PetBreed" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="PetColor" class="control-label"></label>
-                <input asp-for="PetColor" class="form-control" />
+                <label asp-for="PetColor" class="form-label">Color</label>
+                <input asp-for="PetColor" class="form-control" placeholder="Enter pet color" />
                 <span asp-validation-for="PetColor" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="PetWeight" class="control-label"></label>
-                <input asp-for="PetWeight" class="form-control" />
+                <label asp-for="PetWeight" class="form-label">Weight (lbs)</label>
+                <input asp-for="PetWeight" class="form-control" type="number" step="0.1" placeholder="Enter pet weight" />
                 <span asp-validation-for="PetWeight" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="PetAge" class="control-label"></label>
-                <input asp-for="PetAge" class="form-control" />
+                <label asp-for="PetAge" class="form-label">Age (years)</label>
+                <input asp-for="PetAge" class="form-control" type="number" step="1" placeholder="Enter pet age" />
                 <span asp-validation-for="PetAge" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="PetGender" class="control-label"></label>
-                <input asp-for="PetGender" class="form-control" />
-                <span asp-validation-for="PetGender" class="text-danger"></span>
+                <label asp-for="PetGender" class="form-label">Gender</label>
+                <select asp-for="PetGender" class="form-control">
+                    <option value="">-- Select Gender --</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Unsure">Unsure</option>
+                </select>
             </div>
+
             <div class="form-group">
-                <label asp-for="PetVaccination" class="control-label"></label>
-                <input asp-for="PetVaccination" class="form-control" />
+                <label class="form-label">Vaccinated</label>
+
+                <div class="form-check">
+                    <input type="radio" asp-for="PetVaccination" class="form-check-input" value="true" id="vaccinatedYes" required />
+                    <label class="form-check-label" for="vaccinatedYes">Yes</label>
+                </div>
+
+                <div class="form-check">
+                    <input type="radio" asp-for="PetVaccination" class="form-check-input" value="false" id="vaccinatedNo" required />
+                    <label class="form-check-label" for="vaccinatedNo">No</label>
+                </div>
+
                 <span asp-validation-for="PetVaccination" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="PetAllergies" class="control-label"></label>
-                <input asp-for="PetAllergies" class="form-control" />
+                <label asp-for="PetAllergies" class="form-label">Allergies</label>
+                <textarea asp-for="PetAllergies" class="form-control" rows="2" placeholder="Describe any allergies"></textarea>
                 <span asp-validation-for="PetAllergies" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="PetSpecialNeeds" class="control-label"></label>
-                <input asp-for="PetSpecialNeeds" class="form-control" />
+                <label asp-for="PetSpecialNeeds" class="form-label">Special Needs</label>
+                <textarea asp-for="PetSpecialNeeds" class="form-control" rows="2" placeholder="Describe any special needs"></textarea>
                 <span asp-validation-for="PetSpecialNeeds" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="PetMedications" class="control-label"></label>
-                <input asp-for="PetMedications" class="form-control" />
+                <label asp-for="PetMedications" class="form-label">Medications</label>
+                <textarea asp-for="PetMedications" class="form-control" rows="2" placeholder="List any medications"></textarea>
                 <span asp-validation-for="PetMedications" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>
