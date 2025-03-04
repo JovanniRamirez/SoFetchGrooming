@@ -13,7 +13,7 @@ using SoFetchGrooming.Models;
 
 namespace SoFetchGrooming.Controllers
 {
-    [Authorize] // Ensure that only authenticated users can access the PetsController
+    [Authorize(Roles = "CustomerUser")] // Ensure that only authenticated users can access the PetsController
     public class PetsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -70,21 +70,32 @@ namespace SoFetchGrooming.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PetName,PetTypeId,PetBreed,PetColor,PetWeight,PetAge,PetGender,PetVaccination,PetAllergies,PetSpecialNeeds,PetMedications")] Pet pet)
+        public async Task<IActionResult> Create(PetViewModel petVM)
         {
-            // Set the UserId of the pet to the current user's Id
-            pet.UserId = _userManager.GetUserId(User);
-
-            pet.PetType = await _context.PetTypes.FirstOrDefaultAsync(pt => pt.PetTypeId == pet.PetTypeId);
-
             if (ModelState.IsValid)
             {
+                var pet = new Pet
+                {
+                    UserId = _userManager.GetUserId(User),
+                    PetName = petVM.PetName,
+                    PetTypeId = petVM.PetTypeId,
+                    PetBreed = petVM.PetBreed,
+                    PetColor = petVM.PetColor,
+                    PetWeight = petVM.PetWeight,
+                    PetAge = petVM.PetAge,
+                    PetGender = petVM.PetGender,
+                    PetVaccination = petVM.PetVaccination,
+                    PetAllergies = petVM.PetAllergies,
+                    PetSpecialNeeds = petVM.PetSpecialNeeds,
+                    PetMedications = petVM.PetMedications
+                };
+
                 _context.Add(pet);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PetTypeId"] = new SelectList(_context.PetTypes, "PetTypeId", "PetTypeName", pet.PetTypeId);
-            return View(pet);
+
+            return View(petVM);
         }
 
         // GET: Pets/Edit/5
