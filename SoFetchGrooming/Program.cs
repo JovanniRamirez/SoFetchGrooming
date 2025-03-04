@@ -51,6 +51,13 @@ using (var scope = app.Services.CreateScope())
         await userManager.CreateAsync(adminUser, builder.Configuration["AdminUser:Password"]);
         await userManager.AddToRoleAsync(adminUser, "Admin");
     }
+
+    // Check if the 'User' role exists, if not create it
+    if (await roleManager.FindByNameAsync("CustomerUser") == null)
+    {
+        await roleManager.CreateAsync(new IdentityRole("CustomerUser"));
+    }
+
 }
 
 // Configure the HTTP request pipeline.
