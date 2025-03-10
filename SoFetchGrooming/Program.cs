@@ -32,6 +32,10 @@ using (var scope = app.Services.CreateScope())
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
+    // Get admin email and password from configuration appsettings.json
+    var adminEmail = builder.Configuration["AdminUser:Email"];
+    var adminPassword = builder.Configuration["AdminUser:Password"];
+
     // Check if the 'Admin' role exists, if not create it
     if (await roleManager.FindByNameAsync("Admin") == null)
     {
@@ -39,19 +43,25 @@ using (var scope = app.Services.CreateScope())
     }
 
     // Check if the admin user exists, if not create it
-    var adminUser = await userManager.FindByEmailAsync(builder.Configuration["AdminUser:Email"]);
-    if (adminUser == null)
+    if (!string.IsNullOrEmpty(adminEmail) && !string.IsNullOrEmpty(adminPassword))
     {
-        adminUser = new IdentityUser
+        // Find the admin user by email
+        var adminUser = await userManager.FindByEmailAsync(adminEmail);
+        if (adminUser == null)
         {
-            UserName = builder.Configuration["AdminUser:Email"],
-            Email = builder.Configuration["AdminUser:Email"],
-            EmailConfirmed = true // Set EmailConfirmed to true
-        };
-        await userManager.CreateAsync(adminUser, builder.Configuration["AdminUser:Password"]);
-        await userManager.AddToRoleAsync(adminUser, "Admin");
+            // Create a new IdentityUser with the admin email and password
+            adminUser = new IdentityUser
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                EmailConfirmed = true // Set EmailConfirmed to true
+            };
+            // Create the admin user with the password
+            await userManager.CreateAsync(adminUser, adminPassword);
+            // Add the admin user to the 'Admin' role
+            await userManager.AddToRoleAsync(adminUser, "Admin");
+        }
     }
-
     // Check if the 'User' role exists, if not create it
     if (await roleManager.FindByNameAsync("CustomerUser") == null)
     {
