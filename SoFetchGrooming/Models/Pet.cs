@@ -8,6 +8,22 @@ namespace SoFetchGrooming.Models
     /// </summary>
     public class Pet
     {
+        public Pet()
+        {
+            UserId = "";
+            PetName = "";
+            PetTypeId = 0;
+            PetBreed = "";
+            PetColor = "";
+            PetWeight = "";
+            PetAge = "";
+            PetGender = "";
+            PetVaccination = "";
+            PetAllergies = "";
+            PetSpecialNeeds = "";
+            PetMedications = "";
+        }
+
         /// <summary>
         /// Pet ID is the ID of the pet
         /// </summary>
@@ -17,7 +33,7 @@ namespace SoFetchGrooming.Models
         /// <summary>
         /// User ID is the ID of the user who owns the pet
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "User ID is required")]
         public required string UserId { get; set; }
         
         /// <summary>
@@ -29,14 +45,14 @@ namespace SoFetchGrooming.Models
         /// <summary>
         /// PetName is the name of the pet
         /// </summary>
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Pet name is required")]
+        [StringLength(50, ErrorMessage = "Pet name cannot exceed 50 characters")]
         public required string PetName { get; set; }
 
         /// <summary>
         /// PetTypeId is the Id of the type of pet (dog, cat, etc.)
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Pet type is required")]
         [ForeignKey("PetType")]
         public int PetTypeId { get; set; }
         
@@ -48,64 +64,64 @@ namespace SoFetchGrooming.Models
         /// <summary>
         /// PetBreed is the breed of the pet
         /// </summary>
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Pet breed is required")]
+        [StringLength(50, ErrorMessage = "Pet breed cannot exceed 50 characters")]
         public required string PetBreed { get; set; }
 
         /// <summary>
         /// PetColor is the color of the pet
         /// </summary>
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Pet color is required")]
+        [StringLength(50, ErrorMessage = "Pet color cannot exceed 50 characters")]
         public required string PetColor { get; set; }
 
         /// <summary>
         /// PetWeight is the weight of the pet
         /// </summary>
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Pet weight is required")]
+        [StringLength(50, ErrorMessage = "Pet weight cannot exceed 50 characters")]
         public required string PetWeight { get; set; }
 
         /// <summary>
         /// PetAge is the age of the pet
         /// </summary>
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Pet age is required")]
+        [StringLength(50, ErrorMessage = "Pet age cannot exceed 50 characters")]
         public required string PetAge { get; set; }
 
         /// <summary>
         /// PetGender is specifies the sex of the pet
         /// </summary>
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Pet gender is required")]
+        [StringLength(50, ErrorMessage = "Pet gender cannot exceed 50 characters")]
         public required string PetGender { get; set; }
 
         /// <summary>
         /// PetVaccination is the vaccination status of the pet
         /// </summary>
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Pet vaccination is required")]
+        [StringLength(50, ErrorMessage = "Pet vaccination cannot exceed 50 characters")]
         public required string PetVaccination { get; set; }
 
         /// <summary>
         /// PetAllergies is the allergies of the pet
         /// </summary>
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Pet allergies is required")]
+        [StringLength(50, ErrorMessage = "Pet allergies cannot exceed 50 characters")]
         public required string PetAllergies { get; set; }
 
         /// <summary>
         /// PetSpecialNeeds is the special needs of the pet
         /// </summary>
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Pet special needs are required")]
+        [StringLength(50, ErrorMessage = "Pet special needs cannot exceed 50 characters")]
         public required string PetSpecialNeeds { get; set; }
 
         /// <summary>
         /// PetMedications is the medications of the pet
         /// </summary>
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Pet medications are required")]
+        [StringLength(50, ErrorMessage = "Pet medications cannot exceed 50 characters")]
         public required string PetMedications { get; set; }
     }
 
@@ -117,37 +133,37 @@ namespace SoFetchGrooming.Models
     public class PetViewModel
     {
         [Required]
-        public string PetName { get; set; }
+        public required string PetName { get; set; }
 
         [Required]
-        public int PetTypeId { get; set; }
+        public required int PetTypeId { get; set; }
 
         [Required]
-        public string PetBreed { get; set; }
+        public required string PetBreed { get; set; }
 
         [Required]
-        public string PetColor { get; set; }
+        public required string PetColor { get; set; }
 
         [Required]
-        public string PetWeight { get; set; }
+        public required string PetWeight { get; set; }
 
         [Required]
-        public string PetAge { get; set; }
+        public required string PetAge { get; set; }
 
         [Required]
-        public string PetGender { get; set; }
+        public required string PetGender { get; set; }
 
         [Required]
-        public string PetVaccination { get; set; }
+        public required string PetVaccination { get; set; }
 
         [Required]
-        public string PetAllergies { get; set; }
+        public required string PetAllergies { get; set; }
 
         [Required]
-        public string PetSpecialNeeds { get; set; }
+        public required string PetSpecialNeeds { get; set; }
 
         [Required]
-        public string PetMedications { get; set; }
+        public required string PetMedications { get; set; }
     }
 }
 
