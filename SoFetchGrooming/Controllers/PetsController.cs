@@ -108,12 +108,30 @@ namespace SoFetchGrooming.Controllers
 
             var userId = _userManager.GetUserId(User);
             var pet = await _context.Pets.FirstOrDefaultAsync(p => p.PetId == id && p.UserId == userId);
+
             if (pet == null)
             {
                 return NotFound();
             }
+
+            var petVM = new PetViewModel
+            {
+                PetId = pet.PetId,
+                PetName = pet.PetName,
+                PetTypeId = pet.PetTypeId,
+                PetBreed = pet.PetBreed,
+                PetColor = pet.PetColor,
+                PetWeight = pet.PetWeight,
+                PetAge = pet.PetAge,
+                PetGender = pet.PetGender,
+                PetVaccination = pet.PetVaccination,
+                PetAllergies = pet.PetAllergies,
+                PetSpecialNeeds = pet.PetSpecialNeeds,
+                PetMedications = pet.PetMedications
+            };
+
             ViewData["PetTypeId"] = new SelectList(_context.PetTypes, "PetTypeId", "PetTypeName", pet.PetTypeId);
-            return View(pet);
+            return View(petVM);
         }
 
         // POST: Pets/Edit/5
@@ -121,9 +139,9 @@ namespace SoFetchGrooming.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PetId,PetName,PetTypeId,PetBreed,PetColor,PetWeight,PetAge,PetGender,PetVaccination,PetAllergies,PetSpecialNeeds,PetMedications")] Pet pet)
+        public async Task<IActionResult> Edit(int id, PetViewModel petVM)
         {
-            if (id != pet.PetId)
+            if (id != petVM.PetId)
             {
                 return NotFound();
             }
@@ -140,24 +158,24 @@ namespace SoFetchGrooming.Controllers
             {
                 try
                 {
-                    existingPet.PetName = pet.PetName;
-                    existingPet.PetTypeId = pet.PetTypeId;
-                    existingPet.PetBreed = pet.PetBreed;
-                    existingPet.PetColor = pet.PetColor;
-                    existingPet.PetWeight = pet.PetWeight;
-                    existingPet.PetAge = pet.PetAge;
-                    existingPet.PetGender = pet.PetGender;
-                    existingPet.PetVaccination = pet.PetVaccination;
-                    existingPet.PetAllergies = pet.PetAllergies;
-                    existingPet.PetSpecialNeeds = pet.PetSpecialNeeds;
-                    existingPet.PetMedications = pet.PetMedications;
+                    existingPet.PetName = petVM.PetName;
+                    existingPet.PetTypeId = petVM.PetTypeId;
+                    existingPet.PetBreed = petVM.PetBreed;
+                    existingPet.PetColor = petVM.PetColor;
+                    existingPet.PetWeight = petVM.PetWeight;
+                    existingPet.PetAge = petVM.PetAge;
+                    existingPet.PetGender = petVM.PetGender;
+                    existingPet.PetVaccination = petVM.PetVaccination;
+                    existingPet.PetAllergies = petVM.PetAllergies;
+                    existingPet.PetSpecialNeeds = petVM.PetSpecialNeeds;
+                    existingPet.PetMedications = petVM.PetMedications;
 
                     _context.Update(existingPet);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PetExists(pet.PetId))
+                    if (!PetExists(id))
                     {
                         return NotFound();
                     }
@@ -168,8 +186,8 @@ namespace SoFetchGrooming.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PetTypeId"] = new SelectList(_context.PetTypes, "PetTypeId", "PetTypeName", pet.PetTypeId);
-            return View(pet);
+            ViewData["PetTypeId"] = new SelectList(_context.PetTypes, "PetTypeId", "PetTypeName", petVM.PetTypeId);
+            return View(petVM);
         }
 
         // GET: Pets/Delete/5

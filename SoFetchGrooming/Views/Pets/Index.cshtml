@@ -17,20 +17,22 @@ else
 {    
     <h1>Your pets</h1>
 
+    <br />
+
     <p>
-        <a asp-action="Create">Add a pet</a>
+        <a asp-action="Create" class="btn btn-info">Add a pet</a>
     </p>
 
     <table class="table">
         <thead>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.PetName)</th>
-                <th>@Html.DisplayNameFor(model => model.PetType)</th>
-                <th>@Html.DisplayNameFor(model => model.PetBreed)</th>
-                <th>@Html.DisplayNameFor(model => model.PetColor)</th>
-                <th>@Html.DisplayNameFor(model => model.PetWeight)</th>
-                <th>@Html.DisplayNameFor(model => model.PetAge)</th>
-                <th>@Html.DisplayNameFor(model => model.PetGender)</th>
+                <th> Name </th>
+                <th> Species </th>
+                <th> Breed </th>
+                <th> Color </th>
+                <th> Weight </th>
+                <th> Age </th>
+                <th> Gender </th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -44,14 +46,10 @@ else
                     <td> @Html.DisplayFor(modelItem => item.PetWeight) lbs </td>
                     <td> @Html.DisplayFor(modelItem => item.PetAge) years </td>
                     <td> @Html.DisplayFor(modelItem => item.PetGender) </td>
-                    @* <td> @Html.DisplayFor(modelItem => item.PetVaccination) </td> *@
-                    @* <td> @Html.DisplayFor(modelItem => item.PetAllergies) </td> *@
-                    @* <td> @Html.DisplayFor(modelItem => item.PetSpecialNeeds) </td> *@
-                    @* <td> @Html.DisplayFor(modelItem => item.PetMedications) </td> *@
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.PetId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.PetId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.PetId">Delete</a>
+                        <a asp-action="Edit" class="btn btn-dark" asp-route-id="@item.PetId">Edit Info</a> |
+                        <a asp-action="Details" class="btn btn-dark" asp-route-id="@item.PetId">Details</a> |
+                        <a asp-action="Delete" class="btn btn-dark" asp-route-id="@item.PetId">Remove Pet</a>
                     </td>
                 </tr>
             }
