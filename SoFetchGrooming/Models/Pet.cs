@@ -116,6 +116,8 @@ namespace SoFetchGrooming.Models
     /// </summary>
     public class PetViewModel
     {
+        public int? PetId { get; set; } // Id is nullable to handle the case where the user is creating a new pet
+
         [Required]
         public string PetName { get; set; }
 
