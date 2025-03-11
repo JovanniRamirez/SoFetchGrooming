@@ -18,7 +18,10 @@
     {
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-                <img src="@item.ProductImage" class="card-img-top" alt="Product Image">
+                <div class="image-container">
+                    <img src="@item.ProductImage" class="card-img-top square-image" alt="Product Image">
+                </div>
+                
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.ProductName)</h5>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.ProductDescription)</p>

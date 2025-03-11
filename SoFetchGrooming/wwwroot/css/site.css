@@ -23,7 +23,7 @@ body {
 
 /*Jovanni Added Card style changes for Product page and other that use Bootstrap cards*/
 .card {
-    min-height: 680px; /* Adjust this value as needed */
+    min-height: 500px; /* Adjust this value as needed */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -90,4 +90,16 @@ h1 {
 /*Make the footer static to keep footer from overlapping into the main body*/
 footer {
     position: static !important;
+}
+
+/*Make the cards in the product page square*/
+.square-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.image-container {
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
 }
