@@ -10,7 +10,11 @@
 <h1>Products</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    @if (User.IsInRole("Admin")) 
+    {
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    }
+    
 </p>
 
 <div class="row">
@@ -29,9 +33,13 @@
                     <p class="card-text"><strong>Quantity:</strong> @Html.DisplayFor(modelItem => item.ProductQuantity)</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-primary">Edit</a>
                             <a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-info">Details</a>
-                            <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-danger">Delete</a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-danger">Delete</a>
+                            }
+                            
                         </div>
                     </div>
                 </div>
