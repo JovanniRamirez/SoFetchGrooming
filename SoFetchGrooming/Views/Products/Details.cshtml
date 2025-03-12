@@ -10,39 +10,48 @@
     <h4>Product</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-12 col-sm-2">
             @Html.DisplayNameFor(model => model.ProductName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-12 col-sm-10 text-custom-padding">
             @Html.DisplayFor(model => model.ProductName)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt class="col-12 col-sm-2">
             @Html.DisplayNameFor(model => model.ProductDescription)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-12 col-sm-10 text-custom-padding">
             @Html.DisplayFor(model => model.ProductDescription)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt class="col-12 col-sm-2">
             @Html.DisplayNameFor(model => model.ProductPrice)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-12 col-sm-10 text-custom-padding">
             @Html.DisplayFor(model => model.ProductPrice)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt class="col-12 col-sm-2">
             @Html.DisplayNameFor(model => model.ProductQuantity)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-12 col-sm-10 text-custom-padding">
             @Html.DisplayFor(model => model.ProductQuantity)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt class="col-12 col-sm-2">
             @Html.DisplayNameFor(model => model.ProductImage)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-12 col-sm-10 text-custom-padding">
             @Html.DisplayFor(model => model.ProductImage)
         </dd>
     </dl>
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.ProductId">Edit</a> |
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.ProductId">Edit</a>
+        <span>|</span>
+    }
     <a asp-action="Index">Back to List</a>
 </div>

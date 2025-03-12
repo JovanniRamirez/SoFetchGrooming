@@ -103,3 +103,10 @@ footer {
     padding-bottom: 100%;
     position: relative;
 }
+
+@media (min-width: 576px) and (max-width: 992px)
+{
+    .text-custom-padding {
+        padding-left: 4.5em;
+    }
+}
