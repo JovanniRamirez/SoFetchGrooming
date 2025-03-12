@@ -21,7 +21,7 @@ namespace SoFetchGrooming.Models
         /// Product Description
         /// </summary>
         [Required]
-        [StringLength(100)]
+        [StringLength(150)]
         public required string ProductDescription { get; set; }
 
         /// <summary>
