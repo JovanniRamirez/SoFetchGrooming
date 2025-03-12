@@ -33,7 +33,7 @@
                     <p class="card-text"><strong>Quantity:</strong> @Html.DisplayFor(modelItem => item.ProductQuantity)</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-info">Details</a>
+                            <a asp-action="Details" asp-route-id="@item.ProductId" asp-route-page="@Model.PageNumber" class="btn btn-sm btn-outline-info">Details</a>
                             @if (User.IsInRole("Admin"))
                             {
                                 <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-primary">Edit</a>

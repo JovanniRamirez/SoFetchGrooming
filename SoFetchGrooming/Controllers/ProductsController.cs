@@ -49,7 +49,7 @@ namespace SoFetchGrooming.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [AllowAnonymous] // Allow anonymous users to access this action
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, int? page)
         {
             if (id == null) // Check if the id is null
             {
@@ -62,6 +62,7 @@ namespace SoFetchGrooming.Controllers
             {
                 return NotFound();
             }
+            ViewData["currentPage"] = page ?? 1; // Store the current page in the ViewData
             // Return the product to the view
             return View(product);
         }

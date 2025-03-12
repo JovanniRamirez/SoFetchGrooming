@@ -53,5 +53,6 @@
         <a asp-action="Edit" asp-route-id="@Model?.ProductId">Edit</a>
         <span>|</span>
     }
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-route-page="@ViewData["currentPage"]">Back to List</a>
+
 </div>
