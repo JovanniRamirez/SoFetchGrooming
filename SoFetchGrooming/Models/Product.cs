@@ -41,11 +41,8 @@ namespace SoFetchGrooming.Models
         [Display(Name ="Product Quantity")]
         public int ProductQuantity { get; set; }
 
-        /// <summary>
-        /// Product Image
-        /// </summary>
-        [Url]
         [Display(Name ="Product Image")]
-        public required string ProductImage { get; set; }
+        // Navigation property for related images
+        public ICollection<ProductImage> ProductImages { get; set; }
     }
 }
