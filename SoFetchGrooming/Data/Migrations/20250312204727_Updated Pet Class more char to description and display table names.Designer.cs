@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SoFetchGrooming.Data;
 
@@ -11,9 +12,11 @@ using SoFetchGrooming.Data;
 namespace SoFetchGrooming.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250312204727_Updated Pet Class more char to description and display table names")]
+    partial class UpdatedPetClassmorechartodescriptionanddisplaytablenames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -489,6 +492,10 @@ namespace SoFetchGrooming.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("ProductImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -503,28 +510,6 @@ namespace SoFetchGrooming.Data.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("SoFetchGrooming.Models.ProductImage", b =>
-                {
-                    b.Property<int>("ProductImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductImageId"));
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductImageId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductImage");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.ServiceType", b =>
@@ -719,17 +704,6 @@ namespace SoFetchGrooming.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SoFetchGrooming.Models.ProductImage", b =>
-                {
-                    b.HasOne("SoFetchGrooming.Models.Product", "Product")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("SoFetchGrooming.Models.ShoppingCart", b =>
                 {
                     b.HasOne("SoFetchGrooming.Models.ApplicationUser", "User")
@@ -744,11 +718,6 @@ namespace SoFetchGrooming.Data.Migrations
             modelBuilder.Entity("SoFetchGrooming.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
-                });
-
-            modelBuilder.Entity("SoFetchGrooming.Models.Product", b =>
-                {
-                    b.Navigation("ProductImages");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.ShoppingCart", b =>
