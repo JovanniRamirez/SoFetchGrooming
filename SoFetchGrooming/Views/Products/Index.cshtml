@@ -23,9 +23,16 @@
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
                 <div class="image-container">
-                    <img src="@item.ProductImage" class="card-img-top square-image" alt="Product Image">
+                    @if (item.ProductImages != null && item.ProductImages.Any())
+                    {
+                        <partial name="_Carousel" model="item.ProductImages.Select(img => img.ImageUrl)" view-data="@(new ViewDataDictionary(Html.ViewData) { { "CarouselId", item.ProductId } })" />
+                    }
+                    else
+                    {
+                        <img src="https://via.placeholder.com/150" class="card-img-top square-image" alt="No Image Available">
+                    }
                 </div>
-                
+
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.ProductName)</h5>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.ProductDescription)</p>
