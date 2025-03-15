@@ -35,7 +35,9 @@ namespace SoFetchGrooming.Controllers
         [AllowAnonymous] // Allow anonymous users to access this action
         public async Task<IActionResult> Index(int? page)
         {
-            var products = await _context.Products.OrderBy(p => p.ProductId).ToListAsync(); // Order the products by the product id
+            var products = await _context.Products
+                .Include(p => p.ProductImages) // Include the related product images
+                .OrderBy(p => p.ProductId).ToListAsync(); // Order the products by the product id
             int pageSize = 12; // Set the page size to 12
             int pageNumber = (page ?? 1); // Set the page number to the page number or 1
             // Return the products to the view using ToPagedList to paginate the products
@@ -87,10 +89,11 @@ namespace SoFetchGrooming.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,ProductName,ProductDescription,ProductPrice,ProductQuantity,ProductImage")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductName,ProductDescription,ProductPrice,ProductQuantity,ProductImages")] Product product)
         {
             if (ModelState.IsValid)
             {
+                // Create a new product and add it to the context
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
