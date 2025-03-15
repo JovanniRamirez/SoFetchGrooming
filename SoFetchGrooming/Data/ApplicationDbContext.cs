@@ -27,6 +27,8 @@ namespace SoFetchGrooming.Data
 
         public DbSet<PetType> PetTypes { get; set; } = default!;
 
+        public DbSet<ProductImage> ProductImages { get; set; } = default!;
+
         public DbSet<Product> Products { get; set; } = default!;
 
         public DbSet<ServiceType> ServiceTypes { get; set; } = default!;
@@ -42,6 +44,12 @@ namespace SoFetchGrooming.Data
                 new PetType { PetTypeId = 1, PetTypeName = "Dog" },
                 new PetType { PetTypeId = 2, PetTypeName = "Cat" }
             );
+
+            // Configure the one-to-many relationship between Product and ProductImage
+            modelBuilder.Entity<ProductImage>()
+                .HasOne(p => p.Product)
+                .WithMany(p => p.ProductImages)
+                .HasForeignKey(p => p.ProductId);
         }
     }
 }
