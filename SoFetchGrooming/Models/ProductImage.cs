@@ -17,6 +17,6 @@
         public int ProductId { get; set; }
 
         // Navigation property for related product
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
     }
 }
