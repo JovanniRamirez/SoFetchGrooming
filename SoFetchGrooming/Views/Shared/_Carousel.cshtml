@@ -15,7 +15,9 @@
             @foreach (var image in Model.Select((value, index) => new { value, index }))
             {
                 <div class="carousel-item @(image.index == 0 ? "active" : "")">
-                    <img src="@image.value" class="d-block w-100" alt="Image">
+                    <div class="image-container-carousel">
+                        <img src="@image.value" class="d-block w-100" alt="Image">
+                    </div>
                 </div>
             }
         </div>
@@ -30,3 +32,11 @@
         </button>
     </div>
 }
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var myCarousel = document.querySelector('#carouselIndicators-@ViewData["CarouselId"]');
+        var carousel = new bootstrap.Carousel(myCarousel, {
+            interval: 8000 // Set the interval to 5 seconds
+        });
+    });
+</script>
