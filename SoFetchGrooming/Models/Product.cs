@@ -32,7 +32,7 @@ namespace SoFetchGrooming.Models
         [Required]
         [Display(Name ="Product Price")]
         [DataType(DataType.Currency)]
-        public decimal ProductPrice { get; set; }
+        public decimal ProductPrice { get; set; } 
 
         /// <summary>
         /// Product Quantity in stock
@@ -43,6 +43,7 @@ namespace SoFetchGrooming.Models
 
         [Display(Name ="Product Image")]
         // Navigation property for related images
-        public ICollection<ProductImage> ProductImages { get; set; }
+        public ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
     }
 }
+
