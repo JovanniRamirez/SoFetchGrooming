@@ -8,16 +8,20 @@ using Microsoft.EntityFrameworkCore;
 using SoFetchGrooming.Data;
 using SoFetchGrooming.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace SoFetchGrooming.Controllers
 {
+    [Authorize]
     public class AppointmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AppointmentsController(ApplicationDbContext context)
+        public AppointmentsController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Appointments
@@ -49,9 +53,23 @@ namespace SoFetchGrooming.Controllers
 
         // GET: Appointments/Create
         [Authorize] // Only allow authenticated users to create appointments
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Email");
+            var userId = _userManager.GetUserId(User);
+            var userPets = await _context.Pets
+                .Where(p => p.UserId == userId)
+                .Select(p => new { p.PetId, p.PetName })
+                .ToListAsync();
+
+            if (!userPets.Any())
+            {
+                TempData["ErrorMessage"] = "You must have a pet to create an appointment.";
+                return RedirectToAction("Create", "Pets");
+            }
+
+            ViewData["PetId"] = new SelectList(userPets, "PetId", "PetName");
+            ViewData["ServiceTypeId"] = new SelectList(_context.ServiceTypes, "ServiceTypeId", "ServiceTypeName");
+
             return View();
         }
 
