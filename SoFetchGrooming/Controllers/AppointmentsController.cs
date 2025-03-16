@@ -68,7 +68,7 @@ namespace SoFetchGrooming.Controllers
             }
 
             ViewData["PetId"] = new SelectList(userPets, "PetId", "PetName");
-            ViewData["ServiceTypeId"] = new SelectList(_context.ServiceTypes, "ServiceTypeId", "ServiceTypeName");
+            ViewData["ServiceTypeId"] = new SelectList(await _context.ServiceTypes.ToListAsync(), "ServiceTypeId", "ServiceName");
 
             return View();
         }
