@@ -33,12 +33,35 @@
                 <input asp-for="ProductQuantity" class="form-control" />
                 <span asp-validation-for="ProductQuantity" class="text-danger"></span>
             </div>
+
+            <!-- Existing Image URLs -->
             <div class="form-group">
-                <label asp-for="ProductImages" class="control-label"></label>
-                <input asp-for="ProductImages" class="form-control" />
-                <span asp-validation-for="ProductImages" class="text-danger"></span>
+                <label>Product Images</label>
+                <div id="image-url-container">
+                    @if (Model.ProductImages != null && Model.ProductImages.Any())
+                    {
+                        var productImagesList = Model.ProductImages.ToList(); // Convert to list for easier indexing
+                        @for (int i = 0; i < Model.ProductImages.Count; i++)
+                        {
+                            <div class="input-group mb-2" id="image-row-@i">
+                                <input type="text"
+                                       name="ProductImages[@i].ImageUrl"
+                                       value="@productImagesList[i].ImageUrl"
+                                       class="form-control"
+                                       placeholder="Image URL" />
+                                <button type="button"
+                                        class="btn btn-danger"
+                                        onclick="removeImageRow(@i)">
+                                    Remove
+                                </button>
+                            </div>
+                        }
+                    }
+                </div>
+                <button type="button" id="add-image-url" class="btn btn-secondary">Add New Image URL</button>
             </div>
-            <div class="form-group">
+
+            <div class="form-group mt-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -50,5 +73,32 @@
 </div>
 
 @section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let container = document.getElementById('image-url-container');
+            let addImageUrlButton = document.getElementById('add-image-url');
+
+            // Adds a new image input field dynamically
+            addImageUrlButton.addEventListener('click', function () {
+                let newIndex = container.getElementsByTagName('input').length;
+                let newRow = document.createElement('div');
+                newRow.classList.add('input-group', 'mb-2');
+                newRow.id = 'image-row-' + newIndex;
+                newRow.innerHTML = `
+                    <input type="text" name="ProductImages[${newIndex}].ImageUrl" class="form-control" placeholder="Image URL" />
+                    <button type="button" class="btn btn-danger" onclick="removeImageRow(${newIndex})">Remove</button>
+                `;
+                container.appendChild(newRow);
+            });
+        });
+
+        // Removes an existing image input field dynamically
+        function removeImageRow(index) {
+            let row = document.getElementById('image-row-' + index);
+            if (row) {
+                row.remove();
+            }
+        }
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
