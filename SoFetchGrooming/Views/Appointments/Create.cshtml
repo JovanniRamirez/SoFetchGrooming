@@ -43,13 +43,13 @@
             
             <div class="form-group">
                 <label asp-for="AppointmentDate" class="control-label"></label>
-                <input asp-for="AppointmentDate" class="form-control" type="date"/>
+                <input asp-for="AppointmentDate" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
                 <span asp-validation-for="AppointmentDate" class="text-danger"></span>
             </div>
             
             <div class="form-group">
                 <label asp-for="AppointmentTime" class="control-label"></label>
-                <input asp-for="AppointmentTime" class="form-control" type="time" step="900"/>
+                <input asp-for="AppointmentTime" class="form-control" type="time" min="09:00" max="17:00" step="900" />
                 <span asp-validation-for="AppointmentTime" class="text-danger"></span>
             </div>
             
