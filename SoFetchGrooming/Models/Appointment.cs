@@ -32,7 +32,6 @@ namespace SoFetchGrooming.Models
         /// </summary>
         [Required]
         [Display(Name = "Pet")]
-        [StringLength(50)]
         public int PetId { get; set; }
 
         /// <summary>
@@ -40,7 +39,6 @@ namespace SoFetchGrooming.Models
         /// </summary>
         [Required]
         [Display(Name = "Service Type")]
-        [StringLength(50)]
         public int ServiceTypeId { get; set; }
 
         /// <summary>
