@@ -38,8 +38,22 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ProductImages)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductImages)
+        <dd class="col-12 col-sm-10 text-custom-padding">
+            @if (Model.ProductImages != null && Model.ProductImages.Any())
+            {
+                <ul>
+                    @foreach (var image in Model.ProductImages)
+                    {
+                        <li>
+                            <a href="@image.ImageUrl" target="_blank">@image.ImageUrl</a>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No images available.</p>
+            }
         </dd>
     </dl>
     
