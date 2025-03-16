@@ -4,6 +4,13 @@
     ViewData["Title"] = "Create";
 }
 
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
 <h1>Create</h1>
 
 <h4>Appointment</h4>
@@ -12,33 +19,44 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="UserId" class="control-label"></label>
                 <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
             </div>
+            
             <div class="form-group">
                 <label asp-for="PetId" class="control-label"></label>
-                <input asp-for="PetId" class="form-control" />
+                <select asp-for="PetId" class="form-control" asp-items="ViewBag.PetId">
+                    <option value="">-- Select a Pet --</option>
+                </select>
                 <span asp-validation-for="PetId" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <label asp-for="ServiceTypeId" class="control-label"></label>
-                <input asp-for="ServiceTypeId" class="form-control" />
+                <select asp-for="ServiceTypeId" class="form-control" asp-items="ViewBag.ServiceTypeId">
+                    <option value="">-- Select a Service --</option>
+                </select>
                 <span asp-validation-for="ServiceTypeId" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <label asp-for="AppointmentDate" class="control-label"></label>
                 <input asp-for="AppointmentDate" class="form-control" type="date"/>
                 <span asp-validation-for="AppointmentDate" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <label asp-for="AppointmentTime" class="control-label"></label>
                 <input asp-for="AppointmentTime" class="form-control" type="time" step="900"/>
                 <span asp-validation-for="AppointmentTime" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>
