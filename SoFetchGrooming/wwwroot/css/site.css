@@ -23,7 +23,7 @@ body {
 
 /*Jovanni Added Card style changes for Product page and other that use Bootstrap cards*/
 .card {
-    min-height: 680px; /* Adjust this value as needed */
+    min-height: 500px; /* Adjust this value as needed */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -90,4 +90,58 @@ h1 {
 /*Make the footer static to keep footer from overlapping into the main body*/
 footer {
     position: static !important;
+}
+
+/*Make the cards in the product page square*/
+.square-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+/* Ensure the image container maintains a fixed aspect ratio */
+.image-container-carousel {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100%; /* 1:1 Aspect Ratio */
+}
+
+/* Style for the images */
+.image-container-carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+/*    width: 100%;
+    height: 100%;*/
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+}
+
+/* Add padding to the left of the text in detail <dd> tag*/
+@media (min-width: 576px) and (max-width: 992px) {
+    .text-custom-padding {
+        padding-left: 4.5em;
+    }
+}
+/* Style for the previous control arrow */
+.carousel-control-prev-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border-radius: 50%; /* Rounded shape */
+}
+
+/* Style for the next control arrow */
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border-radius: 50%; /* Rounded shape */
+}
+
+/* Style for the carousel indicators */
+.carousel-indicators [data-bs-target] {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background color */
+    border: 2px solid white; /* White border for contrast */
+}
+
+/* Style for the active indicator */
+.carousel-indicators .active {
+    background-color: white; /* White color for the active indicator */
+    border: 2px solid black; /* Black border for contrast */
 }
