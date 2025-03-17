@@ -253,7 +253,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasKey("AdminId");
 
-                    b.ToTable("Admins");
+                    b.ToTable("Admins", (string)null);
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.Appointment", b =>
@@ -284,7 +284,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Appointment");
+                    b.ToTable("Appointment", (string)null);
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.CartItem", b =>
@@ -313,7 +313,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItems", (string)null);
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.Order", b =>
@@ -338,7 +338,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.OrderItem", b =>
@@ -367,7 +367,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.Pet", b =>
@@ -441,7 +441,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Pets");
+                    b.ToTable("Pets", (string)null);
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.PetType", b =>
@@ -459,7 +459,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasKey("PetTypeId");
 
-                    b.ToTable("PetTypes");
+                    b.ToTable("PetTypes", (string)null);
 
                     b.HasData(
                         new
@@ -504,7 +504,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.ServiceType", b =>
@@ -530,7 +530,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasKey("ServiceTypeId");
 
-                    b.ToTable("ServiceTypes");
+                    b.ToTable("ServiceTypes", (string)null);
 
                     b.HasData(
                         new
@@ -628,7 +628,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShoppingCarts");
+                    b.ToTable("ShoppingCarts", (string)null);
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.ApplicationUser", b =>

@@ -77,7 +77,7 @@ namespace SoFetchGrooming.Controllers
             if (tomorrow.DayOfWeek == DayOfWeek.Sunday) // If it's Sunday, set to Monday
             {
                 tomorrow = tomorrow.AddDays(1);
-        }
+            }
 
             var appointmentVM = new AppointmentViewModel
             {
@@ -100,16 +100,38 @@ namespace SoFetchGrooming.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize] 
-        public async Task<IActionResult> Create([Bind("AppointmentId,UserId,PetId,ServiceTypeId,AppointmentDate,AppointmentTime")] Appointment appointment)
+        public async Task<IActionResult> Create(AppointmentViewModel appointmentVM)
         {
+            var userId = _userManager.GetUserId(User);
+
+            var petExists = await _context.Pets
+                .AnyAsync(p => p.PetId == appointmentVM.PetId && p.UserId == userId);
+
+            if (!petExists) 
+            {
+                ModelState.AddModelError("PetId", "Pet does not exist.");
+            }
+
             if (ModelState.IsValid)
             {
-                _context.Add(appointment);
+
+                var appointment = new Appointment
+                {
+                    UserId = userId,
+                    PetId = appointmentVM.PetId,
+                    ServiceTypeId = appointmentVM.ServiceTypeId,
+                    AppointmentDate = appointmentVM.AppointmentDate,
+                    AppointmentTime = appointmentVM.AppointmentTime
+                };
+
+                _context.Add(appointment); // Add the appointment to the context
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "UserId", "UserEmail", appointment.UserId);
-            return View(appointment);
+
+            ViewData["PetId"] = new SelectList(_context.Pets, "PetId", "PetName", appointmentVM.PetId);
+
+            return View(appointmentVM);
         }
 
         // GET: Appointments/Edit/5
