@@ -14,6 +14,7 @@ namespace SoFetchGrooming.Models
         /// Product Name
         /// </summary>
         [Required]
+        [Display(Name ="Product Name")]
         [StringLength(50)]
         public required string ProductName { get; set; }
 
@@ -21,26 +22,28 @@ namespace SoFetchGrooming.Models
         /// Product Description
         /// </summary>
         [Required]
-        [StringLength(100)]
+        [Display(Name ="Product Description")]
+        [StringLength(200)]
         public required string ProductDescription { get; set; }
 
         /// <summary>
         /// Product Price
         /// </summary>
         [Required]
+        [Display(Name ="Product Price")]
         [DataType(DataType.Currency)]
-        public decimal ProductPrice { get; set; }
+        public decimal ProductPrice { get; set; } 
 
         /// <summary>
         /// Product Quantity in stock
         /// </summary>
         [Required]
+        [Display(Name ="Product Quantity")]
         public int ProductQuantity { get; set; }
 
-        /// <summary>
-        /// Product Image
-        /// </summary>
-        [Url]
-        public required string ProductImage { get; set; }
+        [Display(Name ="Product Images")]
+        // Navigation property for related images
+        public ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
     }
 }
+

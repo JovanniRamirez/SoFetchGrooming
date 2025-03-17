@@ -33,10 +33,14 @@
                 <span asp-validation-for="ProductQuantity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductImage" class="control-label"></label>
-                <input asp-for="ProductImage" class="form-control" />
-                <span asp-validation-for="ProductImage" class="text-danger"></span>
+                <label>Product Images</label>
+                <div id="image-url-container">
+                    <input type="text" name="ProductImages[0].ImageUrl" class="form-control mb-2" />
+                    <span asp-validation-for="ProductImages" class="text-danger"></span>
+                </div>
+                <button type="button" id="add-image-url" class="btn btn-secondary">Add Image URL</button>
             </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -49,5 +53,27 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Script that adds new input fields for image URLs
+        document.getElementById('add-image-url').addEventListener('click', function () {
+            // Get the container where the new input will be added
+            var container = document.getElementById('image-url-container');
+            
+            // Get the current number of input fields
+            var index = container.getElementsByTagName('input').length;
+            
+            // Create a new input element
+            var inputImageUrl = document.createElement('input');
+            inputImageUrl.type = 'text'; // Set the type to text
+            inputImageUrl.name = 'ProductImages[' + index + '].ImageUrl'; // Set the name attribute to include the current index
+            inputImageUrl.className = 'form-control mb-2'; // Set the class for styling
+            
+            // Append the new input field to the container
+            container.appendChild(inputImageUrl);
+        });
+
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

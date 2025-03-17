@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SoFetchGrooming.Data;
 
@@ -11,9 +12,11 @@ using SoFetchGrooming.Data;
 namespace SoFetchGrooming.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250313070358_addProductImageListV2")]
+    partial class addProductImageListV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,7 +256,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasKey("AdminId");
 
-                    b.ToTable("Admins", (string)null);
+                    b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.Appointment", b =>
@@ -271,9 +274,11 @@ namespace SoFetchGrooming.Data.Migrations
                         .HasColumnType("time");
 
                     b.Property<int>("PetId")
+                        .HasMaxLength(50)
                         .HasColumnType("int");
 
                     b.Property<int>("ServiceTypeId")
+                        .HasMaxLength(50)
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -284,7 +289,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Appointment", (string)null);
+                    b.ToTable("Appointment");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.CartItem", b =>
@@ -313,7 +318,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.Order", b =>
@@ -338,7 +343,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.OrderItem", b =>
@@ -367,7 +372,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.Pet", b =>
@@ -441,7 +446,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Pets", (string)null);
+                    b.ToTable("Pets");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.PetType", b =>
@@ -459,7 +464,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasKey("PetTypeId");
 
-                    b.ToTable("PetTypes", (string)null);
+                    b.ToTable("PetTypes");
 
                     b.HasData(
                         new
@@ -500,7 +505,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.ProductImage", b =>
@@ -522,7 +527,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("ProductImage");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.ServiceType", b =>
@@ -548,86 +553,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasKey("ServiceTypeId");
 
-                    b.ToTable("ServiceTypes", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ServiceTypeId = 1,
-                            ServiceDescription = "Complete body wash for pets.",
-                            ServiceName = "Full Body Wash",
-                            ServicePrice = 0.0
-                        },
-                        new
-                        {
-                            ServiceTypeId = 2,
-                            ServiceDescription = "Remove excess shedding.",
-                            ServiceName = "De-Shedding",
-                            ServicePrice = 0.0
-                        },
-                        new
-                        {
-                            ServiceTypeId = 3,
-                            ServiceDescription = "Complete grooming for dogs.",
-                            ServiceName = "Dog Grooming",
-                            ServicePrice = 0.0
-                        },
-                        new
-                        {
-                            ServiceTypeId = 4,
-                            ServiceDescription = "Trimming and shaping of dog nails.",
-                            ServiceName = "Dog Nail Trimming",
-                            ServicePrice = 0.0
-                        },
-                        new
-                        {
-                            ServiceTypeId = 5,
-                            ServiceDescription = "Trimming and shaping of cat nails.",
-                            ServiceName = "Cat Nail Trimming",
-                            ServicePrice = 0.0
-                        },
-                        new
-                        {
-                            ServiceTypeId = 6,
-                            ServiceDescription = "Gentle cleaning of pet ears.",
-                            ServiceName = "Ear Cleaning",
-                            ServicePrice = 0.0
-                        },
-                        new
-                        {
-                            ServiceTypeId = 7,
-                            ServiceDescription = "Teeth brushing for pets.",
-                            ServiceName = "Tooth Brushing",
-                            ServicePrice = 0.0
-                        },
-                        new
-                        {
-                            ServiceTypeId = 8,
-                            ServiceDescription = "Helps maintain pet gland health.",
-                            ServiceName = "Gland Expression",
-                            ServicePrice = 0.0
-                        },
-                        new
-                        {
-                            ServiceTypeId = 9,
-                            ServiceDescription = "Regular brushing to remove tangles.",
-                            ServiceName = "Brushing",
-                            ServicePrice = 0.0
-                        },
-                        new
-                        {
-                            ServiceTypeId = 10,
-                            ServiceDescription = "Treatment to remove fleas.",
-                            ServiceName = "Flea Control",
-                            ServicePrice = 0.0
-                        },
-                        new
-                        {
-                            ServiceTypeId = 11,
-                            ServiceDescription = "Special haircuts based on breed.",
-                            ServiceName = "Breed Specific Haircuts",
-                            ServicePrice = 0.0
-                        });
+                    b.ToTable("ServiceTypes");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.ShoppingCart", b =>
@@ -646,7 +572,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShoppingCarts", (string)null);
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.ApplicationUser", b =>
