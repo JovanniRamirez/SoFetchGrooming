@@ -63,4 +63,18 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
+    <script>
+
+        // JavaScript to disable appointment time selection on Sundays
+        // and reset the input if a Sunday is selected
+        document.getElementById("appointmentDate").addEventListener("input", function() {
+            let selectedDate = new Date(this.value);
+            if (selectedDate.getDate() == 0 { // Disable time selection for Sunday
+                this.value = ""; // Reset the time input
+                alert("Appointments are not available on Sundays.");
+            }
+        });
+
+
+    </script>
 }
