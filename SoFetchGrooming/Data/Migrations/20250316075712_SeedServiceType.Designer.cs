@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SoFetchGrooming.Data;
 
@@ -11,9 +12,11 @@ using SoFetchGrooming.Data;
 namespace SoFetchGrooming.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250316075712_SeedServiceType")]
+    partial class SeedServiceType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,7 +256,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasKey("AdminId");
 
-                    b.ToTable("Admins", (string)null);
+                    b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.Appointment", b =>
@@ -284,7 +287,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Appointment", (string)null);
+                    b.ToTable("Appointment");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.CartItem", b =>
@@ -313,7 +316,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.Order", b =>
@@ -338,7 +341,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.OrderItem", b =>
@@ -367,7 +370,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.Pet", b =>
@@ -441,7 +444,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Pets", (string)null);
+                    b.ToTable("Pets");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.PetType", b =>
@@ -459,7 +462,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasKey("PetTypeId");
 
-                    b.ToTable("PetTypes", (string)null);
+                    b.ToTable("PetTypes");
 
                     b.HasData(
                         new
@@ -484,8 +487,12 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ProductImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -500,29 +507,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Products", (string)null);
-                });
-
-            modelBuilder.Entity("SoFetchGrooming.Models.ProductImage", b =>
-                {
-                    b.Property<int>("ProductImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductImageId"));
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductImageId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductImages");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.ServiceType", b =>
@@ -548,7 +533,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasKey("ServiceTypeId");
 
-                    b.ToTable("ServiceTypes", (string)null);
+                    b.ToTable("ServiceTypes");
 
                     b.HasData(
                         new
@@ -646,7 +631,7 @@ namespace SoFetchGrooming.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShoppingCarts", (string)null);
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.ApplicationUser", b =>
@@ -796,17 +781,6 @@ namespace SoFetchGrooming.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SoFetchGrooming.Models.ProductImage", b =>
-                {
-                    b.HasOne("SoFetchGrooming.Models.Product", "Product")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("SoFetchGrooming.Models.ShoppingCart", b =>
                 {
                     b.HasOne("SoFetchGrooming.Models.ApplicationUser", "User")
@@ -821,11 +795,6 @@ namespace SoFetchGrooming.Data.Migrations
             modelBuilder.Entity("SoFetchGrooming.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
-                });
-
-            modelBuilder.Entity("SoFetchGrooming.Models.Product", b =>
-                {
-                    b.Navigation("ProductImages");
                 });
 
             modelBuilder.Entity("SoFetchGrooming.Models.ShoppingCart", b =>

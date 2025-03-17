@@ -8,16 +8,20 @@ using Microsoft.EntityFrameworkCore;
 using SoFetchGrooming.Data;
 using SoFetchGrooming.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace SoFetchGrooming.Controllers
 {
+    [Authorize]
     public class AppointmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AppointmentsController(ApplicationDbContext context)
+        public AppointmentsController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Appointments
@@ -49,10 +53,45 @@ namespace SoFetchGrooming.Controllers
 
         // GET: Appointments/Create
         [Authorize] // Only allow authenticated users to create appointments
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Email");
-            return View();
+            var userId = _userManager.GetUserId(User);
+
+            var userPets = await _context.Pets
+                .Where(p => p.UserId == userId)
+                .Select(p => new { p.PetId, p.PetName })
+                .ToListAsync();
+
+            if (!userPets.Any())
+            {
+                TempData["ErrorMessage"] = "You must have a pet to create an appointment.";
+                return RedirectToAction("Create", "Pets");
+            }
+
+            var serviceTypes = await _context.ServiceTypes
+                .Select(st => new { st.ServiceTypeId, st.ServiceName })
+                .ToListAsync();
+
+            var tomorrow = DateTime.Today.AddDays(1); // Default to tomorrow for the appointment date
+            
+            if (tomorrow.DayOfWeek == DayOfWeek.Sunday) // If it's Sunday, set to Monday
+            {
+                tomorrow = tomorrow.AddDays(1);
+            }
+
+            var appointmentVM = new AppointmentViewModel
+            {
+                PetId = 0, // Default to the first pet
+                ServiceTypeId = 0, // Default to the first service type
+                AppointmentDate = tomorrow, // Default to today
+                AppointmentTime = TimeSpan.FromHours(9), // Default to 9 AM
+            };
+
+            // Populate the dropdowns for pets and service types
+            ViewData["PetId"] = new SelectList(_context.Pets, "PetId", "PetName", appointmentVM.PetId);
+            ViewData["ServiceTypeId"] = new SelectList(serviceTypes, "ServiceTypeId", "ServiceName", appointmentVM.ServiceTypeId);
+
+            return View(appointmentVM);
         }
 
         // POST: Appointments/Create
@@ -61,16 +100,38 @@ namespace SoFetchGrooming.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize] 
-        public async Task<IActionResult> Create([Bind("AppointmentId,UserId,PetId,ServiceTypeId,AppointmentDate,AppointmentTime")] Appointment appointment)
+        public async Task<IActionResult> Create(AppointmentViewModel appointmentVM)
         {
+            var userId = _userManager.GetUserId(User);
+
+            var petExists = await _context.Pets
+                .AnyAsync(p => p.PetId == appointmentVM.PetId && p.UserId == userId);
+
+            if (!petExists) 
+            {
+                ModelState.AddModelError("PetId", "Pet does not exist.");
+            }
+
             if (ModelState.IsValid)
             {
-                _context.Add(appointment);
+
+                var appointment = new Appointment
+                {
+                    UserId = userId,
+                    PetId = appointmentVM.PetId,
+                    ServiceTypeId = appointmentVM.ServiceTypeId,
+                    AppointmentDate = appointmentVM.AppointmentDate,
+                    AppointmentTime = appointmentVM.AppointmentTime
+                };
+
+                _context.Add(appointment); // Add the appointment to the context
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "UserId", "UserEmail", appointment.UserId);
-            return View(appointment);
+
+            ViewData["PetId"] = new SelectList(_context.Pets, "PetId", "PetName", appointmentVM.PetId);
+
+            return View(appointmentVM);
         }
 
         // GET: Appointments/Edit/5
