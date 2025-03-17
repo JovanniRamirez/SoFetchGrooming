@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.Contracts;
 
@@ -9,6 +10,15 @@ namespace SoFetchGrooming.Models
     /// </summary>
     public class Appointment
     {
+        public Appointment()
+        {
+            UserId = "";
+            PetId = 0;
+            ServiceTypeId = 0;
+            AppointmentDate = DateTime.Now;
+            AppointmentTime = TimeSpan.Zero;
+        }
+
         /// <summary>
         /// AppointmentId property for the id of the appointment
         /// </summary>
@@ -25,7 +35,7 @@ namespace SoFetchGrooming.Models
         /// User property for the user connects the userId to the ApplicationUser
         /// </summary>
         [ForeignKey("UserId")]
-        public virtual required ApplicationUser User { get; set; }
+        public virtual ApplicationUser? User { get; set; }
 
         /// <summary>
         /// PetId property for the id of the pet
@@ -58,4 +68,21 @@ namespace SoFetchGrooming.Models
         public TimeSpan AppointmentTime { get; set; }
     }
 
+    public class AppointmentViewModel
+    {
+        public int? AppointmentId { get; set; } // Nullable for new appointments
+
+        [Required]
+        public required int PetId { get; set; }
+
+        [Required]
+        public required int ServiceTypeId { get; set; }
+
+        [Required]
+        public required DateTime AppointmentDate { get; set; }
+
+        [Required]
+        public required TimeSpan AppointmentTime { get; set; }
+
+    }
 }
