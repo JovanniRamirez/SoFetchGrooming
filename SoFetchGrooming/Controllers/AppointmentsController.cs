@@ -56,6 +56,7 @@ namespace SoFetchGrooming.Controllers
         public async Task<IActionResult> Create()
         {
             var userId = _userManager.GetUserId(User);
+
             var userPets = await _context.Pets
                 .Where(p => p.UserId == userId)
                 .Select(p => new { p.PetId, p.PetName })
@@ -67,10 +68,30 @@ namespace SoFetchGrooming.Controllers
                 return RedirectToAction("Create", "Pets");
             }
 
-            ViewData["PetId"] = new SelectList(userPets, "PetId", "PetName");
-            ViewData["ServiceTypeId"] = new SelectList(await _context.ServiceTypes.ToListAsync(), "ServiceTypeId", "ServiceName");
+            var serviceTypes = await _context.ServiceTypes
+                .Select(st => new { st.ServiceTypeId, st.ServiceName })
+                .ToListAsync();
 
-            return View();
+            var tomorrow = DateTime.Today.AddDays(1); // Default to tomorrow for the appointment date
+            
+            if (tomorrow.DayOfWeek == DayOfWeek.Sunday) // If it's Sunday, set to Monday
+            {
+                tomorrow = tomorrow.AddDays(1);
+        }
+
+            var appointmentVM = new AppointmentViewModel
+            {
+                PetId = 0, // Default to the first pet
+                ServiceTypeId = 0, // Default to the first service type
+                AppointmentDate = tomorrow, // Default to today
+                AppointmentTime = TimeSpan.FromHours(9), // Default to 9 AM
+            };
+
+            // Populate the dropdowns for pets and service types
+            ViewData["PetId"] = new SelectList(_context.Pets, "PetId", "PetName", appointmentVM.PetId);
+            ViewData["ServiceTypeId"] = new SelectList(serviceTypes, "ServiceTypeId", "ServiceName", appointmentVM.ServiceTypeId);
+
+            return View(appointmentVM);
         }
 
         // POST: Appointments/Create
