@@ -19,7 +19,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DocsAndImages\DogPics\" />
+    <Folder Include="wwwroot\DogPics\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\DogPics\Crown Dog.jpeg" />
+    <None Include="wwwroot\DogPics\FluffyDogs.jpeg" />
+    <None Include="wwwroot\DogPics\Huskey1.jpeg" />
+    <None Include="wwwroot\DogPics\Little pug.jpeg" />
+    <None Include="wwwroot\DogPics\opensnoutchihuahua.jpeg" />
+    <None Include="wwwroot\DogPics\Peanut Sleeping.jpg" />
+    <None Include="wwwroot\DogPics\Pepper Puppy.jpg" />
+    <None Include="wwwroot\DogPics\Pumpkin Puppy.jpg" />
+    <None Include="wwwroot\DogPics\SheeredWhiteDog.jpeg" />
+    <None Include="wwwroot\DogPics\ShepardPuppy.jpeg" />
+    <None Include="wwwroot\DogPics\threedogsplaying.jpeg" />
   </ItemGroup>
 
 </Project>
